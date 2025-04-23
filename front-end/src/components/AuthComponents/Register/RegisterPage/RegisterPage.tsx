@@ -1,25 +1,33 @@
-import { Box, TextField, Button, Container, Typography } from "@mui/material";
-import { useForm } from "react-hook-form";
+import {
+  Box,
+  TextField,
+  Button,
+  Container,
+  Typography,
+} from "@mui/material";
+import { useForm, Controller } from "react-hook-form";
+import MultiSelectDropdown from "../multiDropdown/MultiSelectDropdown";
 
-//definir tipo
+// Tipo para el formulario
 type FormData = {
   nombre: string;
   correo: string;
   contrasenya: string;
   confirmContrasenya: string;
+  noticias: string[];
 };
 
 export const RegisterPage = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    control,
     watch,
+    formState: { errors },
   } = useForm<FormData>();
 
-  //evento de tipo submit con el tipo que yo he creado de FormData
   const onSubmit = (data: FormData) => {
-    console.log(data);
+    console.log("Datos enviados:", data);
   };
 
   const password = watch("contrasenya");
@@ -57,22 +65,22 @@ export const RegisterPage = () => {
                 message: "Correo no válido",
               },
             })}
-            error={!!errors.contrasenya}
-            helperText={errors.contrasenya?.message}
+            error={!!errors.correo}
+            helperText={errors.correo?.message}
           />
 
           <TextField
             label="Contraseña"
             type="password"
             {...register("contrasenya", {
-              required: "La contraseña  es obligatoria",
+              required: "La contraseña es obligatoria",
               pattern: {
                 value: /^.{9,}$/,
-                message: "La contraseña  no válida",
+                message: "La contraseña debe tener al menos 9 caracteres",
               },
             })}
-            error={!!errors.confirmContrasenya}
-            helperText={errors.confirmContrasenya?.message}
+            error={!!errors.contrasenya}
+            helperText={errors.contrasenya?.message}
           />
 
           <TextField
@@ -85,6 +93,25 @@ export const RegisterPage = () => {
             })}
             error={!!errors.confirmContrasenya}
             helperText={errors.confirmContrasenya?.message}
+          />
+
+          <Controller
+            name="noticias"
+            control={control}
+            rules={{
+              required: "Elige al menos una noticia",
+              validate: (value) =>
+                value.length > 0 || "Selecciona al menos una opción",
+            }}
+            render={({ field, fieldState }) => (
+              <MultiSelectDropdown
+                label="Noticias de Interés"
+                value={field.value || []}
+                onChange={field.onChange}
+                error={!!fieldState.error}
+                helperText={fieldState.error?.message}
+              />
+            )}
           />
 
           <Button type="submit" variant="contained">

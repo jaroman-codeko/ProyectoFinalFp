@@ -1,4 +1,5 @@
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
+import { Link } from "react-router";
 
 export const HeaderComponent = () => {
   return (
@@ -9,17 +10,19 @@ export const HeaderComponent = () => {
             IANotices
           </Typography>
           <Box>
-            <Button color="inherit" variant="outlined">
+            <Button component={Link} color="inherit" to={"/index"} variant="outlined">
               Inicio
             </Button>
             <Button
               color="inherit"
               variant="outlined"
+              component={Link}
+              to={"/services"}
               sx={{ marginInline: "10px" }}
             >
               Servicios
             </Button>
-            <Button color="inherit" variant="outlined">
+            <Button color="inherit"  to={"/auth/login"} variant="outlined" component={Link}>
               Login
             </Button>
           </Box>

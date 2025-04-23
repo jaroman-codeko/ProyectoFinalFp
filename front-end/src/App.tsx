@@ -1,5 +1,5 @@
-import { FooterComponent } from "./components/HeaderComponent/FooterComponent";
-import { HeaderComponent } from "./components/HeaderComponent/HeaderComponent";
+import { FooterComponent } from "./components/PermanentComponents/FooterComponent";
+import { HeaderComponent } from "./components/PermanentComponents/HeaderComponent";
 import { Router } from "./router/Router";
 
 function App() {

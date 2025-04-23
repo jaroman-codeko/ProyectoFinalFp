@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from "react-router";
-import { LoginPage } from "../components/LoginPage/LoginPage";
-import { RegisterPage } from "../components/RegisterPage/RegisterPage";
+import { RegisterPage } from "../components/AuthComponents/Register/RegisterPage/RegisterPage";
+import { LoginPage } from "../components/AuthComponents/LoginPage/LoginPage";
 
 export const RouterAuth = () => {
   return (
